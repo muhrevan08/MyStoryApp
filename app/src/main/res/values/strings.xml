@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyStoryApp</string>
+
+    <!-- MyButton -->
+    <string name="SignIn">SIGN IN</string>
+
+</resources>
