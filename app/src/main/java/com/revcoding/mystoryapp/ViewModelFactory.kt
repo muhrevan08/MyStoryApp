@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.revcoding.mystoryapp.data.model.UserPreference
 import com.revcoding.mystoryapp.ui.viewmodel.LoginViewModel
+import com.revcoding.mystoryapp.ui.viewmodel.MainViewModel
 
 class ViewModelFactory(private val pref: UserPreference): ViewModelProvider.NewInstanceFactory() {
 
@@ -12,6 +13,9 @@ class ViewModelFactory(private val pref: UserPreference): ViewModelProvider.NewI
         return when {
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(pref) as T
+            }
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
+                MainViewModel(pref) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel Class: " + modelClass.name)
         }

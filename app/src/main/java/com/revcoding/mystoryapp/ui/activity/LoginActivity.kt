@@ -11,6 +11,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
+import com.revcoding.mystoryapp.R
 import com.revcoding.mystoryapp.customview.MyButton
 import com.revcoding.mystoryapp.data.model.UserPreference
 import com.revcoding.mystoryapp.databinding.ActivityLoginBinding
@@ -42,7 +43,6 @@ class LoginActivity : AppCompatActivity() {
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[LoginViewModel::class.java]
-
     }
 
     private fun setupAction() {
@@ -54,10 +54,10 @@ class LoginActivity : AppCompatActivity() {
 
             when {
                 email.isEmpty() -> {
-                    binding.edLoginEmail.error = "Masukkan Email"
+                    binding.edLoginEmail.error = getString(R.string.enter_email)
                 }
                 password.isEmpty() -> {
-                    binding.edLoginPassword.error = "Masukkan Password"
+                    binding.edLoginPassword.error = getString(R.string.enter_password)
                 }
                 else -> {
                     loginViewModel.getUser(email, password)
@@ -98,9 +98,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun isFailed() {
         AlertDialog.Builder(this).apply {
-            setTitle("Kesalahan")
-            setMessage("Sepertinya tedapat masalah, harap coba lagi ya..")
-            setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            setTitle(getString(R.string.title_failure))
+            setMessage(getString(R.string.message_there_is_problem))
+            setPositiveButton(getString(R.string.ok)) { dialog, _ -> dialog.dismiss() }
             create()
             show()
         }
@@ -109,9 +109,10 @@ class LoginActivity : AppCompatActivity() {
     private fun isLoginSuccess(success: Boolean) {
         if (success) {
             AlertDialog.Builder(this).apply {
-                setTitle("Berhasil")
-                setMessage("Anda Berhasil Login.")
-                setPositiveButton("Lanjut") { _, _ ->
+                setCancelable(false)
+                setTitle(getString(R.string.title_success))
+                setMessage(getString(R.string.message_login_successfully))
+                setPositiveButton(getString(R.string.next)) { _, _ ->
                     val intent = Intent(applicationContext, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
@@ -120,24 +121,14 @@ class LoginActivity : AppCompatActivity() {
                 create()
                 show()
             }
-            loginViewModel.snackbarText.observe(this) {
-                it.getContentIfNotHandled()?.let { snackBarText ->
-                    Snackbar.make(
-                        window.decorView.rootView,
-                        snackBarText,
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                }
-            }
         } else {
             AlertDialog.Builder(this).apply {
-                setTitle("Kesalahan")
+                setTitle(getString(R.string.title_failure))
                 setMessage("Email/Password yang kamu masukkan salah, harap cek lagi ya..")
-                setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+                setPositiveButton(getString(R.string.ok)) { dialog, _ -> dialog.dismiss() }
                 create()
                 show()
             }
         }
     }
-
 }

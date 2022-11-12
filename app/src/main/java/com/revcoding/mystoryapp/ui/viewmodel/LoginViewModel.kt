@@ -24,9 +24,6 @@ class LoginViewModel(private val pref: UserPreference): ViewModel() {
     private val _isFailed = MutableLiveData<Event<Boolean>>()
     val isFailed: LiveData<Event<Boolean>> = _isFailed
 
-    private val _snackbarText = MutableLiveData<Event<String>>()
-    val snackbarText: LiveData<Event<String>> = _snackbarText
-
     fun login(user: UserModel) {
         viewModelScope.launch {
             pref.login(user)
@@ -41,14 +38,13 @@ class LoginViewModel(private val pref: UserPreference): ViewModel() {
                 _isLoading.value = Event(false)
                 val loginResponse = response.body()
                 if (response.isSuccessful) {
-                    val userId = loginResponse?.loginResult?.userId
                     val name = loginResponse?.loginResult?.name
+                    val userId = loginResponse?.loginResult?.userId
                     val token = loginResponse?.loginResult?.token
 
-                    login(UserModel(userId!!, name!!, token!!))
+                    login(UserModel(name!!, userId!!, token!!))
 
                     _isAuthSuccess.value = Event(true)
-                    _snackbarText.value = Event(response.body()?.message.toString())
                 } else {
                     _isAuthSuccess.value = Event(false)
                 }
@@ -62,10 +58,6 @@ class LoginViewModel(private val pref: UserPreference): ViewModel() {
 
         })
     }
-
-//    fun getUser(): LiveData<LoginResult> {
-//        return pref.getUser().asLiveData()
-//    }
 
     companion object {
         private const val TAG = "LoginViewModel"

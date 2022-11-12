@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/reload"
+        android:icon="@drawable/ic_refresh"
+        android:title="Muat Ulang"
+        app:showAsAction="always"/>
+
+    <group android:menuCategory="container">
+        <item
+            android:id="@+id/language"
+            android:title="Bahasa"/>
+
+        <item
+            android:id="@+id/logout"
+            android:title="Keluar"/>
+    </group>
+</menu>

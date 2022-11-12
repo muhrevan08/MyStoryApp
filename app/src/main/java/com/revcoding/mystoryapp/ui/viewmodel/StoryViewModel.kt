@@ -5,15 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.revcoding.mystoryapp.api.ApiConfig
-import com.revcoding.mystoryapp.data.model.RegisterResponse
+import com.revcoding.mystoryapp.data.model.StoryResponse
 import com.revcoding.mystoryapp.helper.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RegisterViewModel: ViewModel() {
-    private val _isRegisterSuccess = MutableLiveData<Event<Boolean>>()
-    val isRegisterSuccess: LiveData<Event<Boolean>> = _isRegisterSuccess
+class StoryViewModel: ViewModel() {
+
+    private val _userListStory = MutableLiveData<StoryResponse>()
+    val userListStory: LiveData<StoryResponse> = _userListStory
 
     private val _isLoading = MutableLiveData<Event<Boolean>>()
     val isLoading: LiveData<Event<Boolean>> = _isLoading
@@ -21,23 +22,26 @@ class RegisterViewModel: ViewModel() {
     private val _isFailed = MutableLiveData<Event<Boolean>>()
     val isFailed: LiveData<Event<Boolean>> = _isFailed
 
-    fun registerUser(name: String, email: String, password: String) {
+    fun getStory(token: String) {
         _isLoading.value = Event(true)
-        val client = ApiConfig.getApiService().registerUser(name, email, password)
-        client.enqueue(object : Callback<RegisterResponse> {
+        val client = ApiConfig.getApiService().getAllStories("Bearer $token")
+        client.enqueue(object : Callback<StoryResponse> {
             override fun onResponse(
-                call: Call<RegisterResponse>,
-                response: Response<RegisterResponse>
+                call: Call<StoryResponse>,
+                response: Response<StoryResponse>
             ) {
                 _isLoading.value = Event(false)
                 if (response.isSuccessful) {
-                    _isRegisterSuccess.value = Event(true)
+                    val responseBody = response.body()?.listStory
+                    if (!responseBody.isNullOrEmpty()) {
+                        _userListStory.value = response.body()
+                    }
                 } else {
-                    _isRegisterSuccess.value = Event(false)
+                    Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
 
-            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+            override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
                 _isLoading.value = Event(false)
                 _isFailed.value = Event(true)
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
@@ -46,7 +50,6 @@ class RegisterViewModel: ViewModel() {
     }
 
     companion object {
-        private const val TAG = "RegisterViewModel"
+        private const val TAG = "StoryViewModel"
     }
-
 }

@@ -11,7 +11,7 @@
     app:cardCornerRadius="12dp"
     card_view:strokeWidth="3dp"
     card_view:strokeColor="@color/black"
-    card_view:cardBackgroundColor="@color/listStory">
+    card_view:cardBackgroundColor="@color/secondColor">
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,9 +21,7 @@
             android:id="@+id/photoStory"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
@@ -35,27 +33,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Nama"
             android:textSize="14sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@id/photoStory" />
+            card_view:layout_constraintTop_toBottomOf="@id/photoStory"
+            tools:text="Nama"/>
 
         <TextView
             android:id="@+id/createdAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:text="dibuat pada : "
+            android:textColor="@color/white"
             android:textSize="13sp"
-            android:textColor="@color/black"
-            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="@id/name"
-            card_view:layout_constraintTop_toBottomOf="@id/name" />
+            card_view:layout_constraintTop_toBottomOf="@id/name"
+            tools:text="dibuat"/>
 
         <TextView
             android:id="@+id/storyID"
@@ -63,14 +59,25 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="13sp"
             android:textStyle="italic"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="1.0"
-            card_view:layout_constraintStart_toEndOf="@+id/createdAt"
             tools:text="Story ID" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintStart_toStartOf="@+id/createdAt"
+            card_view:layout_constraintTop_toBottomOf="@+id/createdAt"
+            tools:text="Deskripsi" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

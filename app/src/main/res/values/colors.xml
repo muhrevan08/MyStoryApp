@@ -8,6 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="mainColor">#2D3E50</color>
+    <color name="secondColor">#41576f</color>
     <color name="highlight">#1317f3</color>
     <color name="listStory">#b8b8b8</color>
+    <color name="greenLight">#059097</color>
+    <color name="greenDark">#47979b</color>
 </resources>

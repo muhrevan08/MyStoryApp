@@ -9,31 +9,30 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
-
     @FormUrlEncoded
-    @POST("register")
+    @POST("/v1/register")
     fun registerUser(
-        @Field("name") name: String,
-        @Field("email") email: String,
-        @Field("password") password: String
+        @Field("name") name: String? = null,
+        @Field("email") email: String? = null,
+        @Field("password") password: String? = null
     ): Call<RegisterResponse>
 
     @FormUrlEncoded
-    @POST("login")
+    @POST("/v1/login")
     fun loginUser(
-        @Field("email") email: String,
-        @Field("password") password: String
+        @Field("email") email: String? = null,
+        @Field("password") password: String? = null
     ): Call<LoginResponse>
 
     @Multipart
-    @POST("stories")
+    @POST("/v1/stories")
     fun addStory(
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody
     ): Call<StoryResponse>
 
-    @GET("stories")
+    @GET("/v1/stories")
     fun getAllStories(
         @Header("Authorization") token: String
     ): Call<StoryResponse>

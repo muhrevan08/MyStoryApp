@@ -15,9 +15,9 @@ class StoryAdapter: RecyclerView.Adapter<StoryAdapter.ListViewHolder>() {
 
     private val listStory = ArrayList<StoryResponse.Story>()
 
-    fun setDataStoryList(storyUser: List<StoryResponse.Story>) {
-        listStory.clear()
-        listStory.addAll(storyUser)
+    fun setDataStoryList(listStoryUser: List<StoryResponse.Story>) {
+        this.listStory.clear()
+        this.listStory.addAll(listStoryUser)
         notifyDataSetChanged()
     }
 
@@ -46,6 +46,7 @@ class StoryAdapter: RecyclerView.Adapter<StoryAdapter.ListViewHolder>() {
                 name.text = story.name
                 createdAt.text = story.createdAt
                 storyID.text = story.id
+                description.text = story.description
             }
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, DetailStoryActivity::class.java)

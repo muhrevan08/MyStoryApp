@@ -1,57 +1,156 @@
 package com.revcoding.mystoryapp.ui.activity
 
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.provider.Settings
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.revcoding.mystoryapp.R
+import com.revcoding.mystoryapp.ViewModelFactory
 import com.revcoding.mystoryapp.data.model.StoryResponse
+import com.revcoding.mystoryapp.data.model.UserPreference
 import com.revcoding.mystoryapp.databinding.ActivityMainBinding
 import com.revcoding.mystoryapp.ui.adapter.StoryAdapter
 import com.revcoding.mystoryapp.ui.viewmodel.MainViewModel
+import com.revcoding.mystoryapp.ui.viewmodel.StoryViewModel
 
 class MainActivity : AppCompatActivity() {
 
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var storyAdapter: StoryAdapter
-    private val storyViewModel: MainViewModel by viewModels()
-    private var doubleClickBack: Boolean = false
+    private lateinit var mainViewModel: MainViewModel
+    private lateinit var storyViewModel: StoryViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.title = "Story"
 
-        binding.rvStory.setHasFixedSize(true)
 
-        storyViewModel.userStory.observe(this) { story ->
+        storyAdapter = StoryAdapter()
+        binding.rvStory.setHasFixedSize(true)
+        binding.rvStory.adapter = storyAdapter
+
+        setupViewModel()
+        showRecyclerView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.option_menu, menu)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.reload -> {
+                reloadListStory()
+            }
+            R.id.language -> {
+                startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+            }
+            R.id.logout -> {
+                logoutUser()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupViewModel() {
+        // MainViewModel
+        mainViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(UserPreference.getInstance(dataStore))
+        )[MainViewModel::class.java]
+
+        mainViewModel.getUser().observe(this) { user ->
+            if (user.token.isEmpty()) {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            } else {
+                storyViewModel.getStory(user.token)
+            }
+        }
+
+        // StoryViewModel
+        storyViewModel = ViewModelProvider(this)[StoryViewModel::class.java]
+
+        storyViewModel.userListStory.observe(this) { story ->
             setListStory(story)
         }
 
         storyViewModel.isLoading.observe(this) {
-            showLoading(it)
+            it.getContentIfNotHandled()?.let { state ->
+                showLoading(state)
+            }
         }
 
-        storyViewModel.isDataFound.observe(this) {
-            onDataFound(it)
+        storyViewModel.isFailed.observe(this) {
+            it.getContentIfNotHandled()?.let { failed ->
+                isFailed(failed)
+            }
         }
-
-
-        storyAdapter = StoryAdapter()
-        binding.rvStory.adapter = storyAdapter
-
-        showRecyclerView()
     }
 
     private fun setListStory(storyList: StoryResponse) {
         storyAdapter.setDataStoryList(storyList.listStory)
+    }
+
+    private fun reloadListStory() {
+        mainViewModel.getUser().observe(this) { user ->
+            storyViewModel.getStory(user.token)
+        }
+
+        storyViewModel.userListStory.observe(this) { story ->
+            setListStory(story)
+        }
+
+        storyViewModel.isLoading.observe(this) {
+            it.getContentIfNotHandled()?.let { state ->
+                showLoading(state)
+            }
+        }
+
+        storyViewModel.isFailed.observe(this) {
+            it.getContentIfNotHandled()?.let { failed ->
+                isFailed(failed)
+            }
+        }
+
+    }
+
+    private fun logoutUser() {
+        AlertDialog.Builder(this).apply {
+            setTitle("Logout")
+            setMessage("Apakah kamu yakin ingin keluar?")
+            setPositiveButton("Keluar") { _, _ ->
+                mainViewModel.logout()
+            }
+            setNegativeButton("Batal") { dialog, _ -> dialog.cancel()}
+            create()
+            show()
+        }
     }
 
     private fun showRecyclerView() {
@@ -75,58 +174,24 @@ class MainActivity : AppCompatActivity() {
                 progressBar.visibility = View.VISIBLE
             } else {
                 progressBar.visibility = View.INVISIBLE
-                fabAddStory.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    private fun onDataFound(found: Boolean) {
-        binding.apply {
-            if (found) {
                 rvStory.visibility = View.VISIBLE
-            } else {
-                rvStory.visibility = View.INVISIBLE
-
-                Toast.makeText(
-                    this@MainActivity,
-                    "Story Not Found",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
         }
     }
 
-    override fun onBackPressed() {
-        if (doubleClickBack) {
-            super.onBackPressed()
-            finish()
-        } else {
-            doubleClickBack = true
-            Toast.makeText(
-                this,
-                "Press One More Time To Out",
-                Toast.LENGTH_SHORT
-            ).show()
+    private fun isFailed(failed: Boolean) {
+        if (failed) {
+            AlertDialog.Builder(this).apply {
+                setTitle(getString(R.string.title_failure))
+                setMessage(getString(R.string.message_there_is_problem))
+                setPositiveButton("Muat Ulang") { _, _ -> reloadListStory() }
+                create()
+                show()
+            }
         }
-        Handler(mainLooper).postDelayed( { doubleClickBack = false }, DURATION_CLICK_BACK)
     }
-
-//    private fun setListStory(items: List<Story>) {
-//        val listStory = ArrayList<Story>()
-//        for (data in items) {
-//            val story = Story(data.photoUrl, data.name, data.createdAt, data.id)
-//            listStory.addAll(listOf(story))
-//        }
-//        val storyAdapter = StoryAdapter(listStory)
-//        binding.rvStory.adapter = storyAdapter
-//
-//        storyAdapter.
-//    }
 
     companion object {
-
-        private const val TAG = "MainActivity"
         const val KEY_ID = "id"
-        const val DURATION_CLICK_BACK = 2000L
     }
 }
