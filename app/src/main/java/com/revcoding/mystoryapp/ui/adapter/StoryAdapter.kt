@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.revcoding.mystoryapp.R
+import com.revcoding.mystoryapp.data.model.StoryModel
 import com.revcoding.mystoryapp.data.model.StoryResponse
 import com.revcoding.mystoryapp.databinding.ListStoryBinding
 import com.revcoding.mystoryapp.ui.activity.DetailStoryActivity
@@ -39,18 +40,24 @@ class StoryAdapter: RecyclerView.Adapter<StoryAdapter.ListViewHolder>() {
             with(binding) {
                 Glide.with(itemView.context)
                     .load(story.photoUrl)
-                    .placeholder(R.mipmap.ic_launcher)
-                    .error(R.mipmap.ic_launcher)
+                    .placeholder(R.drawable.no_picture)
+                    .error(R.drawable.no_picture)
                     .into(photoStory)
 
                 name.text = story.name
                 createdAt.text = story.createdAt
                 storyID.text = story.id
-                description.text = story.description
             }
             itemView.setOnClickListener {
+                val storyModel = StoryModel()
+                storyModel.photoUrl = story.photoUrl
+                storyModel.name = story.name
+                storyModel.description = story.description
+                storyModel.createdAt = story.createdAt
+                storyModel.id = story.id
+
                 val intent = Intent(itemView.context, DetailStoryActivity::class.java)
-                intent.putExtra(MainActivity.KEY_ID, story.id)
+                intent.putExtra(MainActivity.KEY_ID, storyModel)
                 itemView.context.startActivity(intent)
             }
         }

@@ -44,9 +44,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.title = "Story"
-
-
         storyAdapter = StoryAdapter()
         binding.rvStory.setHasFixedSize(true)
         binding.rvStory.adapter = storyAdapter
@@ -142,12 +139,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun logoutUser() {
         AlertDialog.Builder(this).apply {
-            setTitle("Logout")
-            setMessage("Apakah kamu yakin ingin keluar?")
-            setPositiveButton("Keluar") { _, _ ->
+            setTitle(getString(R.string.title_confirmation))
+            setMessage(getString(R.string.message_are_you_sure_want_to_exit))
+            setPositiveButton(getString(R.string.logout)) { _, _ ->
                 mainViewModel.logout()
             }
-            setNegativeButton("Batal") { dialog, _ -> dialog.cancel()}
+            setNegativeButton(getString(R.string.cancel)) { dialog, _ -> dialog.cancel()}
             create()
             show()
         }

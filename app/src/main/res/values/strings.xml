@@ -1,19 +1,23 @@
 <resources>
-    <string name="app_name">MyStoryApp</string>
+    <string name="app_name">Story App</string>
+
+    <!-- ActionBarTitle -->
+    <string name="title_story_detail">Detail Cerita</string>
 
     <!-- MyButton -->
     <string name="login">LOGIN</string>
 
-
     <!-- AlertDialog -->
     <string name="title_success">Berhasil</string>
     <string name="title_failure">Kesalahan</string>
+    <string name="title_confirmation">Konfirmasi</string>
     <string name="title_account_registered">Akun Sudah Terdaftar</string>
 
     <string name="message_there_is_problem">Sepertinya terdapat masalah, harap coba lagi ya..</string>
     <string name="message_login_successfully">Anda Berhasil Login.</string>
-    <string name="message_registered_email_try_again">Email yang kamu masukkan telah terdaftar. Silahkan coba lagi..</string>
     <string name="message_account_sucessfully_registered">Akun Berhasil di Daftarkan!!</string>
+    <string name="message_registered_email_try_again">Email yang kamu masukkan telah terdaftar. Silahkan coba lagi..</string>
+    <string name="message_are_you_sure_want_to_exit">Apakah kamu yakin ingin keluar?</string>
 
     <string name="enter_email">Masukkan Email</string>
     <string name="enter_password">Masukkan Password</string>
@@ -21,5 +25,9 @@
 
     <string name="next">Lanjut</string>
     <string name="ok">OK</string>
+    <string name="logout">Keluar</string>
+    <string name="cancel">Batal</string>
+
+
 
 </resources>

@@ -47,11 +47,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             android:textColor="@color/white"
             android:textSize="13sp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="@id/name"
             card_view:layout_constraintTop_toBottomOf="@id/name"
-            tools:text="dibuat"/>
+            tools:text="dibuat" />
 
         <TextView
             android:id="@+id/storyID"
@@ -65,19 +67,6 @@
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             tools:text="Story ID" />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:textColor="@color/white"
-            android:textSize="13sp"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintStart_toStartOf="@+id/createdAt"
-            card_view:layout_constraintTop_toBottomOf="@+id/createdAt"
-            tools:text="Deskripsi" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
