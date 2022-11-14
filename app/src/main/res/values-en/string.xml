@@ -64,5 +64,6 @@
     <!-- MENU TITLE -->
     <string name="reload">Reload</string>
     <string name="language">Language</string>
+    <string name="description">description</string>
 
 </resources>

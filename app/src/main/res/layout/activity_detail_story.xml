@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:src="@color/secondColor"
+        android:contentDescription="@string/description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/description"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         tools:src="@tools:sample/backgrounds/scenic" />
 

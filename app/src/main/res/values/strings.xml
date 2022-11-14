@@ -3,6 +3,7 @@
 
     <string name="error_format_email">Format email tidak valid</string>
     <string name="error_password">Kata sandi harus 6 atau lebih karakter</string>
+    <string name="description">deskripsi</string>
 
     <!-- ActionBarTitle -->
     <string name="title_story_detail">Detail Cerita</string>
@@ -63,6 +64,5 @@
     <!-- MENU TITLE -->
     <string name="reload">Muat Ulang</string>
     <string name="language">Bahasa</string>
-
 
 </resources>

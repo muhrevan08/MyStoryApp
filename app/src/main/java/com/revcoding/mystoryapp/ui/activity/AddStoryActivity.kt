@@ -12,7 +12,6 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -28,7 +27,6 @@ import com.revcoding.mystoryapp.data.model.UserPreference
 import com.revcoding.mystoryapp.databinding.ActivityAddStoryBinding
 import com.revcoding.mystoryapp.helper.createTempFile
 import com.revcoding.mystoryapp.helper.reduceFileImage
-import com.revcoding.mystoryapp.helper.rotateBitmap
 import com.revcoding.mystoryapp.helper.uriToFile
 import com.revcoding.mystoryapp.ui.viewmodel.AddStoryViewModel
 import com.revcoding.mystoryapp.ui.viewmodel.MainViewModel

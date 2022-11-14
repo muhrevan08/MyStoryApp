@@ -7,7 +7,6 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.revcoding.mystoryapp.R
 import com.revcoding.mystoryapp.customview.MyButton
 import com.revcoding.mystoryapp.databinding.ActivityRegisterBinding

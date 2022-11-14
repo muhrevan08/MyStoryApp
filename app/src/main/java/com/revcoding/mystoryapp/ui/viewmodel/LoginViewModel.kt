@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.revcoding.mystoryapp.api.ApiConfig
 import com.revcoding.mystoryapp.data.model.LoginResponse
-import com.revcoding.mystoryapp.data.model.LoginResult
 import com.revcoding.mystoryapp.data.model.UserModel
 import com.revcoding.mystoryapp.data.model.UserPreference
 import com.revcoding.mystoryapp.helper.Event

@@ -11,7 +11,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.revcoding.mystoryapp.R
 import com.revcoding.mystoryapp.customview.MyButton
 import com.revcoding.mystoryapp.data.model.UserPreference
