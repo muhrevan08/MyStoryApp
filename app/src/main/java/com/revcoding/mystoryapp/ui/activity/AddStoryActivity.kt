@@ -85,7 +85,7 @@ class AddStoryActivity : AppCompatActivity() {
 
         supportActionBar?.title = getString(R.string.title_add_story)
 
-        binding.capturePhoto.setOnClickListener { giveAccess() }
+        binding.capturePhoto.setOnClickListener { givePermission() }
         binding.choosePicture.setOnClickListener { openGallery() }
         binding.uploadStory.setOnClickListener { uploadStory() }
 
@@ -101,7 +101,7 @@ class AddStoryActivity : AppCompatActivity() {
         addStoryViewModel = ViewModelProvider(this)[AddStoryViewModel::class.java]
     }
 
-    private fun giveAccess(){
+    private fun givePermission(){
         if (!cameraPermissionGranted()) {
             ActivityCompat.requestPermissions(
                 this,
