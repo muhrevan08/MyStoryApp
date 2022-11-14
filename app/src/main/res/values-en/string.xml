@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Story App</string>
+
+    <string name="error_format_email">Invalid email format</string>
+    <string name="error_password">Password must be 6 or more characters</string>
+
+    <!-- ActionBarTitle -->
+    <string name="title_story_detail">Story Details</string>
+
+    <!-- AlertDialog -->
+    <string name="title_success">Succeed</string>
+    <string name="title_failure">Error</string>
+    <string name="title_confirmation">Confirmation</string>
+    <string name="title_add_story">Add Story</string>
+    <string name="title_access_denied">Permission denied</string>
+    <string name="title_photo_required">Photo Required!</string>
+    <string name="title_account_registered">Account Already Registered</string>
+
+    <string name="message_login_successfully">You have successfully logged in.</string>
+    <string name="message_insert_photo_first">Insert Photo First..</string>
+    <string name="message_story_uploaded_successfully">Story Successfully Uploaded</string>
+    <string name="message_are_you_sure_want_to_exit">Are you sure you want to leave?</string>
+    <string name="message_account_sucessfully_registered">Account Registered Successfully!!</string>
+    <string name="message_there_is_problem">There seems to be a problem, please try again.</string>
+    <string name="message_are_you_sure_upload_story">Are you sure you want to upload a story?</string>
+    <string name="message_worng_email_password">The email/password you entered is incorrect, please check again.</string>
+    <string name="message_registered_email_try_again">The email you entered has been registered. Please try again..</string>
+    <string name="message_camera_access_denied">The camera cannot be used, you must allow access to access it!</string>
+
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="next">Next</string>
+    <string name="cancel">Cancel</string>
+    <string name="logout">Logout</string>
+
+    <string name="error_description_empty">Please Fill in the Description First!</string>
+    <string name="choose_picture">Choose a Picture</string>
+
+
+    <!-- LAYOUT LOGIN -->
+    <string name="text_story_app">STORY APP</string>
+    <string name="text_welcome">Welcome!</string>
+    <string name="text_enter_data">Enter your account data</string>
+    <string name="text_button_login">LOGIN</string>
+    <string name="text_dont_have_account">Don\'t have an account yet?</string>
+    <string name="text_register_here">Register here</string>
+
+    <!-- LAYOUT REGISTER -->
+    <string name="text_lets_register">Let\'s Register Your Account Right Now!!</string>
+    <string name="text_register">REGISTER</string>
+    <string name="text_already_have_account">Already have an account?</string>
+    <string name="text_login_here">Login here</string>
+
+    <!-- LAYOUT ADD STORY -->
+    <string name="text_take_photo_or_choose_picture">Take Your Photo or Choose from Gallery</string>
+    <string name="text_enter_description_story">Enter your story description..</string>
+    <string name="text_upload_story">UPLOAD STORY</string>
+
+    <!-- MENU TITLE -->
+    <string name="reload">Reload</string>
+    <string name="language">Language</string>
+
+</resources>

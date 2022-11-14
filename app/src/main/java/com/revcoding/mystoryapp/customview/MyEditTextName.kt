@@ -29,7 +29,6 @@ class MyEditTextName: AppCompatEditText {
         super.onDraw(canvas)
 
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
-        hint = "Masukkan Nama"
     }
 
     private fun init() {

@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -59,6 +60,12 @@ class LoginActivity : AppCompatActivity() {
                 password.isEmpty() -> {
                     binding.edLoginPassword.error = getString(R.string.enter_password)
                 }
+                !isEmailValid(email) -> {
+                    binding.edLoginEmail.error = getString(R.string.error_format_email)
+                }
+                !isPasswordValid(password) -> {
+                    binding.edLoginPassword.error = getString(R.string.error_password)
+                }
                 else -> {
                     loginViewModel.getUser(email, password)
 
@@ -91,9 +98,24 @@ class LoginActivity : AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
+
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+            )
         } else {
             binding.progressBar.visibility = View.INVISIBLE
+
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         }
+    }
+
+    private fun isEmailValid(email: CharSequence): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun isPasswordValid(password: String): Boolean {
+        return password.length >= 6
     }
 
     private fun isFailed() {
@@ -124,7 +146,7 @@ class LoginActivity : AppCompatActivity() {
         } else {
             AlertDialog.Builder(this).apply {
                 setTitle(getString(R.string.title_failure))
-                setMessage("Email/Password yang kamu masukkan salah, harap cek lagi ya..")
+                setMessage(getString(R.string.message_worng_email_password))
                 setPositiveButton(getString(R.string.ok)) { dialog, _ -> dialog.dismiss() }
                 create()
                 show()

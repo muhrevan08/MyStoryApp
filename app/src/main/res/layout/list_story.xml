@@ -28,7 +28,7 @@
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -43,7 +43,7 @@
             tools:text="Nama"/>
 
         <TextView
-            android:id="@+id/createdAt"
+            android:id="@+id/tvCreatedAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -51,12 +51,12 @@
             android:textColor="@color/white"
             android:textSize="13sp"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintStart_toStartOf="@id/name"
-            card_view:layout_constraintTop_toBottomOf="@id/name"
+            card_view:layout_constraintStart_toStartOf="@id/tvName"
+            card_view:layout_constraintTop_toBottomOf="@id/tvName"
             tools:text="dibuat" />
 
         <TextView
-            android:id="@+id/storyID"
+            android:id="@+id/tvStoryID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -67,6 +67,15 @@
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             tools:text="Story ID" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:text="Description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

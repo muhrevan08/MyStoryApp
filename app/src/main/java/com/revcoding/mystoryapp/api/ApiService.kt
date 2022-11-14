@@ -1,5 +1,6 @@
 package com.revcoding.mystoryapp.api
 
+import com.revcoding.mystoryapp.data.model.AddStoryResponse
 import com.revcoding.mystoryapp.data.model.LoginResponse
 import com.revcoding.mystoryapp.data.model.RegisterResponse
 import com.revcoding.mystoryapp.data.model.StoryResponse
@@ -26,11 +27,11 @@ interface ApiService {
 
     @Multipart
     @POST("/v1/stories")
-    fun addStory(
+    fun addStories(
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody
-    ): Call<StoryResponse>
+    ): Call<AddStoryResponse>
 
     @GET("/v1/stories")
     fun getAllStories(

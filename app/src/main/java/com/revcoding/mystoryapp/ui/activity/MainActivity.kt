@@ -10,9 +10,11 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityOptionsCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -50,6 +52,11 @@ class MainActivity : AppCompatActivity() {
 
         setupViewModel()
         showRecyclerView()
+
+        binding.fabAddStory.setOnClickListener {
+            val moveToAddStory = Intent(this@MainActivity, AddStoryActivity::class.java)
+            startActivity(moveToAddStory, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle())
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -169,9 +176,16 @@ class MainActivity : AppCompatActivity() {
             if (isLoading) {
                 rvStory.visibility = View.INVISIBLE
                 progressBar.visibility = View.VISIBLE
+
+                window.setFlags(
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                )
             } else {
                 progressBar.visibility = View.INVISIBLE
                 rvStory.visibility = View.VISIBLE
+
+                window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }
         }
     }
@@ -181,7 +195,7 @@ class MainActivity : AppCompatActivity() {
             AlertDialog.Builder(this).apply {
                 setTitle(getString(R.string.title_failure))
                 setMessage(getString(R.string.message_there_is_problem))
-                setPositiveButton("Muat Ulang") { _, _ -> reloadListStory() }
+                setPositiveButton(getString(R.string.reload)) { _, _ -> reloadListStory() }
                 create()
                 show()
             }

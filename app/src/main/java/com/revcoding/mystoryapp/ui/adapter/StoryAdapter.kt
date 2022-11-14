@@ -1,8 +1,11 @@
 package com.revcoding.mystoryapp.ui.adapter
 
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.revcoding.mystoryapp.R
@@ -40,25 +43,39 @@ class StoryAdapter: RecyclerView.Adapter<StoryAdapter.ListViewHolder>() {
             with(binding) {
                 Glide.with(itemView.context)
                     .load(story.photoUrl)
-                    .placeholder(R.drawable.no_picture)
-                    .error(R.drawable.no_picture)
+                    .placeholder(R.drawable.no_image)
+                    .error(R.drawable.no_image)
                     .into(photoStory)
 
-                name.text = story.name
-                createdAt.text = story.createdAt
-                storyID.text = story.id
-            }
-            itemView.setOnClickListener {
-                val storyModel = StoryModel()
-                storyModel.photoUrl = story.photoUrl
-                storyModel.name = story.name
-                storyModel.description = story.description
-                storyModel.createdAt = story.createdAt
-                storyModel.id = story.id
+                tvName.text = story.name
+                tvCreatedAt.text = story.createdAt
+                tvStoryID.text = story.id
+                tvDescription.text = story.description
 
-                val intent = Intent(itemView.context, DetailStoryActivity::class.java)
-                intent.putExtra(MainActivity.KEY_ID, storyModel)
-                itemView.context.startActivity(intent)
+                itemView.setOnClickListener {
+                    val storyModel = StoryModel()
+                    storyModel.photoUrl = story.photoUrl
+                    storyModel.name = story.name
+                    storyModel.description = story.description
+                    storyModel.createdAt = story.createdAt
+                    storyModel.id = story.id
+
+                    val moveToDetail = Intent(itemView.context, DetailStoryActivity::class.java)
+                    moveToDetail.putExtra(MainActivity.KEY_ID, storyModel)
+
+                    val optionsCompat: ActivityOptionsCompat =
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            itemView.context as Activity,
+                            Pair(photoStory, "photoStory"),
+                            Pair(tvName, "name"),
+                            Pair(tvName, "name2"),
+                            Pair(tvDescription, "description"),
+                            Pair(tvCreatedAt, "createdAt"),
+                            Pair(tvStoryID, "storyID")
+                        )
+
+                    itemView.context.startActivity(moveToDetail, optionsCompat.toBundle())
+                }
             }
         }
     }

@@ -28,8 +28,8 @@ class DetailStoryActivity : AppCompatActivity() {
         binding.apply {
             Glide.with(applicationContext)
                 .load(detailStory.photoUrl)
-                .placeholder(R.drawable.no_picture)
-                .error(R.drawable.no_picture)
+                .placeholder(R.drawable.no_image)
+                .error(R.drawable.no_image)
                 .into(photoStory)
 
             tvName.text = detailStory.name

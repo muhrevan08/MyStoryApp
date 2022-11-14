@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
@@ -55,15 +56,15 @@ class RegisterActivity : AppCompatActivity() {
                 else -> {
                     registerViewModel.registerUser(name, email, password)
 
-                    registerViewModel.isLoading.observe(this) {
-                        it.getContentIfNotHandled()?.let { state ->
-                            showLoading(state)
-                        }
-                    }
-
                     registerViewModel.isRegisterSuccess.observe(this) {
                         it.getContentIfNotHandled()?.let { success ->
                             isRegisterSuccess(success)
+                        }
+                    }
+
+                    registerViewModel.isLoading.observe(this) {
+                        it.getContentIfNotHandled()?.let { state ->
+                            showLoading(state)
                         }
                     }
 
@@ -84,8 +85,13 @@ class RegisterActivity : AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+            )
         } else {
             binding.progressBar.visibility = View.INVISIBLE
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         }
     }
 

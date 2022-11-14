@@ -1,33 +1,68 @@
 <resources>
     <string name="app_name">Story App</string>
 
+    <string name="error_format_email">Format email tidak valid</string>
+    <string name="error_password">Kata sandi harus 6 atau lebih karakter</string>
+
     <!-- ActionBarTitle -->
     <string name="title_story_detail">Detail Cerita</string>
-
-    <!-- MyButton -->
-    <string name="login">LOGIN</string>
 
     <!-- AlertDialog -->
     <string name="title_success">Berhasil</string>
     <string name="title_failure">Kesalahan</string>
     <string name="title_confirmation">Konfirmasi</string>
+    <string name="title_add_story">Tambah Cerita</string>
+    <string name="title_access_denied">Izin ditolak</string>
+    <string name="title_photo_required">Foto Diperlukan!</string>
     <string name="title_account_registered">Akun Sudah Terdaftar</string>
 
-    <string name="message_there_is_problem">Sepertinya terdapat masalah, harap coba lagi ya..</string>
     <string name="message_login_successfully">Anda Berhasil Login.</string>
-    <string name="message_account_sucessfully_registered">Akun Berhasil di Daftarkan!!</string>
-    <string name="message_registered_email_try_again">Email yang kamu masukkan telah terdaftar. Silahkan coba lagi..</string>
+    <string name="message_insert_photo_first">Masukkan Foto Terlebih Dahulu..</string>
+    <string name="message_story_uploaded_successfully">Cerita Berhasil di Unggah</string>
     <string name="message_are_you_sure_want_to_exit">Apakah kamu yakin ingin keluar?</string>
+    <string name="message_account_sucessfully_registered">Akun Berhasil di Daftarkan!!</string>
+    <string name="message_there_is_problem">Sepertinya terdapat masalah, harap coba lagi ya..</string>
+    <string name="message_are_you_sure_upload_story">Apakah kamu yakin ingin mengunggah cerita?</string>
+    <string name="message_worng_email_password">Email/Password yang kamu masukkan salah, harap cek lagi ya..</string>
+    <string name="message_registered_email_try_again">Email yang kamu masukkan telah terdaftar. Silahkan coba lagi..</string>
+    <string name="message_camera_access_denied">Kamera tidak didapat dipakai, kamu harus mengizinkan akses untuk mengaksesnya!</string>
 
+    <string name="enter_name">Masukkan Nama</string>
     <string name="enter_email">Masukkan Email</string>
     <string name="enter_password">Masukkan Password</string>
-    <string name="enter_name">Masukkan Nama</string>
 
-    <string name="next">Lanjut</string>
     <string name="ok">OK</string>
-    <string name="logout">Keluar</string>
+    <string name="yes">Ya</string>
+    <string name="next">Lanjut</string>
     <string name="cancel">Batal</string>
+    <string name="logout">Keluar</string>
 
+    <string name="error_description_empty">Harap Isi Deskripsi Terlebih Dahulu!</string>
+    <string name="choose_picture">Pilih Gambar</string>
+
+
+    <!-- LAYOUT LOGIN -->
+    <string name="text_story_app">STORY APP</string>
+    <string name="text_welcome">Selamat Datang!</string>
+    <string name="text_enter_data">Masukkan data akun kamu</string>
+    <string name="text_button_login">MASUK</string>
+    <string name="text_dont_have_account">Belum punya akun ?</string>
+    <string name="text_register_here">Daftar disini</string>
+
+    <!-- LAYOUT REGISTER -->
+    <string name="text_lets_register">Ayoo Daftarkan Akunmu Sekarang Juga!!</string>
+    <string name="text_register">DAFTAR</string>
+    <string name="text_already_have_account">Sudah punya akun ?</string>
+    <string name="text_login_here">Masuk disini</string>
+
+    <!-- LAYOUT ADD STORY -->
+    <string name="text_take_photo_or_choose_picture">Ambil Foto Kamu atau Pilih dari Galeri</string>
+    <string name="text_enter_description_story">Masukkan deskripsi cerita kamu..</string>
+    <string name="text_upload_story">UNGGAH CERITA</string>
+
+    <!-- MENU TITLE -->
+    <string name="reload">Muat Ulang</string>
+    <string name="language">Bahasa</string>
 
 
 </resources>
