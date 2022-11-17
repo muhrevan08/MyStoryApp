@@ -3,7 +3,10 @@ package com.revcoding.mystoryapp.customview
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.AttributeSet
+import android.util.Patterns
 import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
@@ -29,11 +32,27 @@ class MyEditTextEmail: AppCompatEditText {
         super.onDraw(canvas)
 
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+
+        hint = context.getString(R.string.enter_email)
     }
 
     private fun init() {
         emailIcon = ContextCompat.getDrawable(context, R.drawable.ic_email) as Drawable
         setIconDrawable(startOfTheText = emailIcon)
+
+        addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence, p1: Int, p2: Int, p3: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence, p1: Int, p2: Int, p3: Int) {
+                isEmailValid(s)
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                // Do nothing
+            }
+        })
     }
 
     private fun setIconDrawable(
@@ -48,5 +67,12 @@ class MyEditTextEmail: AppCompatEditText {
             endOfTheText,
             bottomOfTheText
         )
+    }
+
+    private fun isEmailValid(email: CharSequence): Boolean {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            error = context.getString(R.string.error_format_email)
+        } 
+        return true
     }
 }

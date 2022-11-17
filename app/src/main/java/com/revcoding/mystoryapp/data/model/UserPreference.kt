@@ -14,11 +14,10 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             UserModel(
                 preferences[USERID_KEY] ?: "",
                 preferences[NAME_KEY] ?: "",
-                preferences[TOKEN_KEY] ?: ""
+                preferences[TOKEN_KEY] ?: "",
             )
         }
     }
-
 
     suspend fun login(user: UserModel) {
         dataStore.edit { preferences ->
@@ -36,16 +35,16 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
 
     companion object {
         @Volatile
-        private var INSTACE: UserPreference? = null
+        private var INSTANCE: UserPreference? = null
 
-        private val NAME_KEY = stringPreferencesKey("name")
         private val USERID_KEY = stringPreferencesKey("userId")
+        private val NAME_KEY = stringPreferencesKey("name")
         private val TOKEN_KEY = stringPreferencesKey("token")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreference {
-            return INSTACE ?: synchronized(this) {
+            return INSTANCE ?: synchronized(this) {
                 val instance = UserPreference(dataStore)
-                INSTACE = instance
+                INSTANCE = instance
                 instance
             }
         }

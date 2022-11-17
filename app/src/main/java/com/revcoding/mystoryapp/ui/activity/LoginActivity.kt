@@ -59,12 +59,6 @@ class LoginActivity : AppCompatActivity() {
                 password.isEmpty() -> {
                     binding.edLoginPassword.error = getString(R.string.enter_password)
                 }
-                !isEmailValid(email) -> {
-                    binding.edLoginEmail.error = getString(R.string.error_format_email)
-                }
-                !isPasswordValid(password) -> {
-                    binding.edLoginPassword.error = getString(R.string.error_password)
-                }
                 else -> {
                     loginViewModel.getUser(email, password)
 
@@ -107,14 +101,6 @@ class LoginActivity : AppCompatActivity() {
 
             window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         }
-    }
-
-    private fun isEmailValid(email: CharSequence): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-    private fun isPasswordValid(password: String): Boolean {
-        return password.length >= 6
     }
 
     private fun isFailed() {
